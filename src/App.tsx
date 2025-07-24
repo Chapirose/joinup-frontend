@@ -50,18 +50,18 @@ export default function App() {
           }
         />
         <Route
-          path="/my-events"
-          element={
-            <PrivateRoute>
-              <MyCreatedEvents />
-            </PrivateRoute>
-          }
-        />
-        <Route
           path="/my-participations"
           element={
             <PrivateRoute>
               <MyParticipations />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/my-created-events"
+          element={
+            <PrivateRoute>
+              <MyCreatedEvents />
             </PrivateRoute>
           }
         />

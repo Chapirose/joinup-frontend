@@ -1,45 +1,49 @@
 import { useNavigate } from 'react-router-dom';
 
-export default function Dashboard() {
+export default function HomePage() {
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.clear();
-    navigate('/');
+  const handleCreateEventClick = () => {
+    navigate('/create-event'); // Cette route doit être définie dans votre application pour aller à la page de création d'événements
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-green-50 p-6">
-      <h1 className="text-3xl font-bold mb-6 text-green-700">Bienvenue sur JoinUp 🎉</h1>
-
-      <div className="space-y-4 mb-6">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white flex flex-col items-center justify-center p-6">
+      <h1 className="text-4xl font-bold mb-6 text-center text-blue-700 dark:text-blue-400">
+        Bienvenue sur JoinUp 🎉
+      </h1>
+      <div className="flex gap-4 mb-6">
         <button
           onClick={() => navigate('/events')}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded"
         >
           Voir tous les événements
         </button>
-
         <button
-          onClick={() => navigate('/my-events')}
-          className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
+          onClick={() => navigate('/my-created-events')}
+          className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded"
         >
           Événements créés
         </button>
-
         <button
-          onClick={() => navigate('/my-participations')}
-          className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
+          onClick={() => navigate('/my-participated-events')}
+          className="bg-yellow-600 hover:bg-yellow-700 text-white py-2 px-4 rounded"
         >
           Événements rejoints
         </button>
+        <button
+          onClick={() => navigate('/login')}
+          className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded"
+        >
+          Déconnexion
+        </button>
       </div>
-
+      {/* Ajout du bouton pour accéder à la page de création d'événements */}
       <button
-        onClick={handleLogout}
-        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+        onClick={handleCreateEventClick}
+        className="bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded mt-4"
       >
-        Déconnexion
+        Créer un événement
       </button>
     </div>
   );

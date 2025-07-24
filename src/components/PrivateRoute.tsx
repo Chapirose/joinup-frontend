@@ -1,18 +1,18 @@
 import { Navigate } from 'react-router-dom';
-import { isTokenValid } from '../utils/auth';
 
-interface Props {
+interface PrivateRouteProps {
   children: JSX.Element;
 }
 
-export default function PrivateRoute({ children }: Props) {
-  const token = localStorage.getItem('access');
+const PrivateRoute = ({ children }: PrivateRouteProps) => {
+  const token = localStorage.getItem('access'); // Vérifiez si le token existe
 
-  if (!isTokenValid(token)) {
-    localStorage.removeItem('access');
-    localStorage.removeItem('refresh');
+  // Si pas de token, redirigez l'utilisateur vers la page de connexion
+  if (!token) {
     return <Navigate to="/" replace />;
   }
 
-  return children;
-}
+  return children; // Affiche le composant enfant si l'utilisateur est authentifié
+};
+
+export default PrivateRoute;

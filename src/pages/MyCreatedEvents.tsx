@@ -1,4 +1,3 @@
-// src/pages/MyCreatedEvents.tsx
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Calendar, MapPin } from 'lucide-react';
@@ -13,6 +12,7 @@ interface Event {
 
 export default function MyCreatedEvents() {
   const [events, setEvents] = useState<Event[]>([]);
+  const [error, setError] = useState<string | null>(null); // Ajout d'un état d'erreur
   const navigate = useNavigate();
 
   const fetchCreatedEvents = async () => {
@@ -33,6 +33,9 @@ export default function MyCreatedEvents() {
 
     if (response.ok) {
       setEvents(events.filter((event) => event.id !== eventId));
+    } else {
+      const errorData = await response.json();
+      setError(errorData.detail || "Erreur lors de la suppression de l'événement.");
     }
   };
 
@@ -43,6 +46,7 @@ export default function MyCreatedEvents() {
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-6 text-gray-900 dark:text-white">
       <h1 className="text-3xl font-bold mb-6 text-center">Mes événements créés</h1>
+      {error && <p className="text-red-500 mb-4">{error}</p>} {/* Affichage de l'erreur */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {events.map((event) => (
           <div
